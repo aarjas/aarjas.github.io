@@ -32,12 +32,11 @@ Nsim=10000								#Sets the number of MCMC-iterations
 linit=t/3 								#Initial values for the length scales. t/3 is usually fine
 cores=parallel::detectCores() 						#Number of processor cores
 
-#The simulation function takes 6 parameters: the data, number of iterations, initial values for both length
-#scales, the eigenvectors and eigenvalues of the relationship matrix and the number of processor cores.
-#The algorithm usually runs the fastest with half of the total cores. The data must be a matrix with rows corresponding 
-#to the individuals and columns corresponding to the time points
+#The simulation function takes 4 parameters: the data, number of iterations, the eigenvectors and eigenvalues of the
+#relationship matrix and the number of processor cores. The algorithm usually runs the fastest with half of the total cores.
+#The data must be a matrix with rows corresponding to the individuals and columns corresponding to the time points
 
-C=sim(y,Nsim,linit,linit,U,ksi,cores/2)
+C=sim(y,Nsim,U,ksi,cores/2)
 
 #Examine the results
 meanse=colMeans(C$ser)							#Environmental variance posterior mean
