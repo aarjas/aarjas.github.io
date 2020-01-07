@@ -1,6 +1,7 @@
 library(Rcpp)
 library(RcppEigen)
 
+
 #To compile C++ code on R, a compiler is needed. For Windows, the compiler comes with Rtools
 #For further information, see https://support.rstudio.com/hc/en-us/articles/200486498
 
