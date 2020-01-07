@@ -9,6 +9,7 @@ Sys.setenv("PKG_CXXFLAGS"="-fopenmp -std=c++11 -O3 -DEIGEN_NO_DEBUG")
 Sys.setenv("PKG_LIBS"="-fopenmp") 					#Compiler flags
 setwd("C:/Users/Arttu/Documents/GitHub/aarjas.github.io")	#Sets working directory to where the code is
 										#Change this to the right one
+
 sourceCpp("jointdynher.cpp") 						#Compiles the code
 
 #Create some data
