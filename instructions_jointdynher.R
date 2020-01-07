@@ -33,7 +33,8 @@ cores=parallel::detectCores() 						#Number of processor cores
 
 #The simulation function takes 6 parameters: the data, number of iterations, initial values for both length
 #scales, the eigenvectors and eigenvalues of the relationship matrix and the number of processor cores.
-#The algorithm usually runs the fastest with half of the total cores
+#The algorithm usually runs the fastest with half of the total cores. The data must be a matrix with rows corresponding 
+#to the individuals and columns corresponding to the time points
 
 C=sim(y,Nsim,linit,linit,U,ksi,cores/2)
 
