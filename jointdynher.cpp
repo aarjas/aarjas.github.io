@@ -7,6 +7,7 @@
 #include <random>
 #include <string>
 
+
 // [[Rcpp::depends(RcppEigen)]]
 using namespace Eigen;
 
