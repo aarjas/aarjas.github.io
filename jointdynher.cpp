@@ -7,7 +7,6 @@
 #include <random>
 #include <string>
 
-
 // [[Rcpp::depends(RcppEigen)]]
 using namespace Eigen;
 
@@ -123,7 +122,7 @@ void par_r_cpp_call(const VectorXd& n){
 }
 
 // [[Rcpp::export]]
-Rcpp::List sim(MatrixXd Y, const int& Nsim, const double& leinit, const double& lginit, const MatrixXd& Ui, const VectorXd& ksii, const int& cores)
+Rcpp::List sim(MatrixXd Y, const int& Nsim, const MatrixXd& Ui, const VectorXd& ksii, const int& cores)
 {
 	struct timespec start, init, finish;
 	double elapsed_init, elapsed_loop;
@@ -181,8 +180,8 @@ Rcpp::List sim(MatrixXd Y, const int& Nsim, const double& leinit, const double& 
     MatrixXd sgr = MatrixXd::Zero(Nsim, t + 2*extn);
 
     //Length scale chains
-    VectorXd le(Nsim); le(0) = log(leinit);
-    VectorXd lg(Nsim); lg(0) = log(lginit);
+    VectorXd le(Nsim); le(0) = log((t + 0.0)/3);
+    VectorXd lg(Nsim); lg(0) = log((t + 0.0)/3);
 
     //GP matrices
     SimplicialLDLT<SparseMatrix<double> > solvere;
