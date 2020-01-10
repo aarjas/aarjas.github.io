@@ -153,9 +153,6 @@ Rcpp::List sim(MatrixXd Y, const int& Nsim, const MatrixXd& U, const ArrayXd& ks
 
 	Rcpp::Rcout << "Initializing chains, decomposing G...\n\n";
 
-
-    const MatrixXd Yt = Y.transpose();
-
 	const ArrayXXd z2 = (U.transpose()*Y).array().square();
 
     //Parameter chain initialization
