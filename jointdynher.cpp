@@ -122,7 +122,7 @@ void par_r_cpp_call(const VectorXd& n){
 }
 
 // [[Rcpp::export]]
-Rcpp::List sim(MatrixXd Y, const int& Nsim, const MatrixXd& Ui, const VectorXd& ksii, const int& cores)
+Rcpp::List sim(MatrixXd Y, const int& Nsim, const MatrixXd& U, const ArrayXd& ksi, const int& cores)
 {
 	struct timespec start, init, finish;
 	double elapsed_init, elapsed_loop;
@@ -156,17 +156,7 @@ Rcpp::List sim(MatrixXd Y, const int& Nsim, const MatrixXd& Ui, const VectorXd& 
 
     const MatrixXd Yt = Y.transpose();
 
-    //Eigendecomposition of G
-    //EigenSolver<MatrixXd> es;
-    //es.compute(G);
-    //ArrayXd ksi = es.eigenvalues().real();
-    //MatrixXd U = es.eigenvectors().real();
-	ArrayXd ksi = ksii.array();
-	MatrixXd U = Ui;
-    MatrixXd Ut = U.transpose();
-	const MatrixXd YtU = Yt*U;
-	const MatrixXd UtY = Ut*Y;
-	const ArrayXXd z2 = UtY.array().square();
+	const ArrayXXd z2 = (U.transpose()*Y).array().square();
 
     //Parameter chain initialization
 
@@ -412,7 +402,7 @@ Rcpp::List sim(MatrixXd Y, const int& Nsim, const MatrixXd& Ui, const VectorXd& 
 	elapsed_loop += (finish.tv_nsec - init.tv_nsec) / 1000000000.0;
 
 	Rcpp::Rcout << "Ready!\n\n";
-	
+
 	const ArrayXXd finalse = (exp(ser.array() - 2*log(scale))).block(0, extn, Nsim, t);
 	const ArrayXXd finalsg = (exp(sgr.array() - 2*log(scale))).block(0, extn, Nsim, t);
 
